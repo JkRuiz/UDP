@@ -42,7 +42,7 @@ while hay:
     message, addrSerer = cliente.recvfrom(1024)
     i = i + 1
     try:
-        if 'END_OF_FILE' not in message.decode():
+        if 'END_OF_FILE' in message.decode():
             hay = False
             print('received END_OF_FILE')
     except:
