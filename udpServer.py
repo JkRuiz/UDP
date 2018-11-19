@@ -73,7 +73,7 @@ def threaded_function(id, addr):
         # imprime el numero de paquetes enviados.
         # print(data.decode())
 
-        # indica la terminación del while.
+        # indica la terminacion del while.
         hay = False
 
         summary = str(datetime.datetime.now() - start) + "s"
@@ -92,10 +92,10 @@ numeroClientes = int(properties['numberClients'])
 # Numero de puerto que se utilizara.
 port = int(properties['serverPort'])
 
-# Tamaño de los paquetes que se van a usar.
+# Tamanio de los paquetes que se van a usar.
 chunkSize = int(properties['chunkSize'])
 
-# Genera el log de la transacción.
+# Genera el log de la transaccion.
 logPrefix = properties['logPrefix'] + str(numeroClientes) + "_" + str(time.time()) + ".log"
 
 
@@ -105,7 +105,7 @@ serverSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 # Obtiene el hostname sobre el que se ejecuta el programa.
 host = socket.gethostname()
 
-# la dirección y el puerto por donde el servidor va a escuchar.
+# la direccion y el puerto por donde el servidor va a escuchar.
 serverSocket.bind(('', port))
 
 # intensity of protocol messages
