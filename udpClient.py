@@ -28,7 +28,7 @@ mensajeTotal = ""
 # contador de paquetes que recibe
 i = 0
 # Abre el archivo que va a guardar la informacion recibida
-f = open('R_' + fileName, 'w')
+f = open('R_' + fileName, 'wb')
 
 # intensity of protocol messages
 intensity = properties['intensity']
@@ -48,15 +48,13 @@ while hay:
             print('received END_OF_FILE')
     except:
         # se incrementa el numero de paquetes recibidos
-        i = i + 1
-        # se aniade el mensaje que llego al que ya había
-        mensajeTotal = mensajeTotal + message
         if i % 100 == 0:
             print("receiving data..")
+        i = i + 1
+        f.write(message)
     if (time.time() - timer) >= timeout:
         hay = False
-# Escribe el archivo.
-f.write(mensajeTotal)
+
 # Cierra el archivo.
 f.close()
 # print(mensajeTotal)
