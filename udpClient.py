@@ -25,8 +25,7 @@ cliente.sendto('status OK'.encode(), serverAdr)
 hay = True
 # guarda el mensaje a medida que va llegando
 mensajeTotal = ""
-# contador de paquetes que recibe
-i = 0
+
 # Abre el archivo que va a guardar la informacion recibida
 f = open('R_' + fileName, 'wb')
 
@@ -44,21 +43,16 @@ while hay:
     try:
         if 'END_OF_FILE' not in message.decode():
             hay = False
-            i = i + 1
             print('received END_OF_FILE')
     except:
         # se incrementa el numero de paquetes recibidos
         if i % 100 == 0:
             print("receiving data..")
-        i = i + 1
         f.write(message)
     print('tiempo actual: ' + str(time.time() - timer))
     if (time.time() - timer) >= timeout:
+        print('Se cumplio el timeout')
         hay = False
 
-# Cierra el archivo.
 f.close()
-# print(mensajeTotal)
-# print (i)
-for j in range(intensity):
-    cliente.sendto(str(i).encode(), serverAdr)
+cliente.close()

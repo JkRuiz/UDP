@@ -61,21 +61,6 @@ def threaded_function(id, addr):
 
         sout("S: Se enviaron: " + str(i) + "paquetes")
 
-        llego = False
-        while (not llego):
-
-            # recive el numero de pauqetes recibidos.
-            data, addr = serverSocket.recvfrom(1024)
-            if (data != ""):
-                llego = True
-                sout("S: Se recibieron: " + data.decode() + "paquetes")
-
-        # imprime el numero de paquetes enviados.
-        # print(data.decode())
-
-        # indica la terminacion del while.
-        hay = False
-
         summary = str(datetime.datetime.now() - start) + "s"
         sout("C" + str(id) + ": Transfered in " + summary)
 
@@ -150,5 +135,6 @@ with open((logPrefix), 'w') as log:
     for i in range(len(threads)):
         threads[i].join()
 
+    serverSocket.close()
     summary = str(datetime.datetime.now() - tStart) + "s"
     sout("S: Transfered in " + summary)
