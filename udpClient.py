@@ -38,9 +38,9 @@ timer = time.time()
 timeout = int(properties['timeout'])
 # while para recibir y enviar mensajes
 while hay:
-        # envia mensaje al servidor
+
     message, addrSerer = cliente.recvfrom(1024)
-    # recibe el mensaje y lo guarda en la
+
     try:
         if 'END_OF_FILE' not in message.decode():
             hay = False
