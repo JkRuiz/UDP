@@ -41,21 +41,18 @@ while hay:
         # envia mensaje al servidor
     message, addrSerer = cliente.recvfrom(1024)
     # recibe el mensaje y lo guarda en la
-    if 'END_OF_FILE' not in message.decode():
+    try:
+        if 'END_OF_FILE' not in message.decode():
+            hay = False
+            i = i + 1
+            print('received END_OF_FILE')
+    except:
         # se incrementa el numero de paquetes recibidos
         i = i + 1
         # se aniade el mensaje que llego al que ya había
         mensajeTotal = mensajeTotal + message
         if i % 100 == 0:
             print("receiving data..")
-    # Si el mensaje contiene "acabe" se cambia ha false la variable booleana y se incrementa el numero de paquetes
-    else:
-        # cambio de la variable
-        hay = False
-        # Incrementa el numero de paquetes
-        i = i + 1
-        print('received END_OF_FILE')
-
     if (time.time() - timer) >= timeout:
         hay = False
 # Escribe el archivo.
