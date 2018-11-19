@@ -31,7 +31,8 @@ f = open('R_' + fileName, 'wb')
 
 # intensity of protocol messages
 intensity = properties['intensity']
-
+# num paquetes
+i = 0
 # timer para hacer timeout de la conexion
 timer = time.time()
 timeout = int(properties['timeout'])
@@ -39,7 +40,7 @@ timeout = int(properties['timeout'])
 while hay:
 
     message, addrSerer = cliente.recvfrom(1024)
-
+    i = i + 1
     try:
         if 'END_OF_FILE' not in message.decode():
             hay = False
