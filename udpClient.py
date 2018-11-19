@@ -52,6 +52,7 @@ while hay:
             print("receiving data..")
         i = i + 1
         f.write(message)
+    print('tiempo actual: ' + str(time.time() - timer))
     if (time.time() - timer) >= timeout:
         hay = False
 
