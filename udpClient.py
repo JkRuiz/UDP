@@ -27,13 +27,13 @@ hay = True
 mensajeTotal = ""
 # contador de paquetes que recibe
 i = 0
-# Abre el archivo que va a guardar la información recibida
+# Abre el archivo que va a guardar la informacion recibida
 f = open('R_' + fileName, 'w')
 
 # intensity of protocol messages
 intensity = properties['intensity']
 
-# timer para hacer timeout de la conexión
+# timer para hacer timeout de la conexion
 timer = time.time()
 timeout = int(properties['timeout'])
 # while para recibir y enviar mensajes
@@ -44,7 +44,7 @@ while hay:
     if 'END_OF_FILE' not in message.decode():
         # se incrementa el numero de paquetes recibidos
         i = i + 1
-        # se añade el mensaje que llego al que ya había
+        # se aniade el mensaje que llego al que ya había
         mensajeTotal = mensajeTotal + message
         if i % 100 == 0:
             print("receiving data..")
@@ -52,7 +52,7 @@ while hay:
     else:
         # cambio de la variable
         hay = False
-        # Incrementa el número de paquetes
+        # Incrementa el numero de paquetes
         i = i + 1
         print('received END_OF_FILE')
 

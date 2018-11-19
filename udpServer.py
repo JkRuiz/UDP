@@ -33,7 +33,7 @@ def threaded_function(id, addr):
 
     sout("S: " + rsp + " to C" + str(id) + " with IP " + addr[0] + " and port " + str(addr[1]))
 
-    # recepción y envio de mensajes.
+    # recepcion y envio de mensajes.
     while hay:
         start = datetime.datetime.now()
 
@@ -57,7 +57,7 @@ def threaded_function(id, addr):
             serverSocket.sendto(outputData.encode(), addr)
 
         # imprime el contador de mensajes.
-        #print (i)
+        # print (i)
 
         sout("S: Se enviaron: " + str(i) + "paquetes")
 
@@ -134,7 +134,7 @@ with open((logPrefix), 'w') as log:
 
     # Se crean los threads a medida que llegan clientes
     while j <= numeroClientes:
-        # recibe los datos del socket y la dirección del cliente.
+        # recibe los datos del socket y la direccion del cliente.
         data, addr = serverSocket.recvfrom(1024)
         if 'status OK' in data.decode():
             sout("C" + str(j) + ": " + data.decode())
