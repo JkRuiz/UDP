@@ -33,39 +33,13 @@ def threaded_function(id, addr):
 
     sout("S: " + rsp + " to C" + str(id) + " with IP " + addr[0] + " and port " + str(addr[1]))
 
-    # recepcion y envio de mensajes.
-    while hay:
-        start = datetime.datetime.now()
-
-        for chunk in fileChunks:
-            serverSocket.sendto(chunk, addr)
-            i = i + 1
-
-        sout("S: END_OF_FILE")
-
-        # envia mensaje para que el cliente sepa que se termino la transmicion.
-        outputData = 'END_OF_FILE'
-
-        # imprime el mensaje de terminar.
-        # print(outputData)
-
-        # aumenta el contador de paquetes.
-        i = i + 1
-
-        # envia el mensaje de termino.
-        for j in range(intensity):
-            serverSocket.sendto(outputData.encode(), addr)
-
-        # imprime el contador de mensajes.
-        # print (i)
-
-        sout("S: Se enviaron: " + str(i) + "paquetes")
-
-        # indica la terminacion del while.
-        hay = False
-
-        summary = str(datetime.datetime.now() - start) + "s"
-        sout("C" + str(id) + ": Transfered in " + summary)
+    chunkIndex = 0
+    data = fileChunks[chunkIndex]
+    while (data):
+        if(s.sendto(data, addr)):
+            print "sending ..."
+            chunkIndex += 1
+            data = fileChunks[chunkIndex]
 
 
 # Obtiene las propiesdades.
@@ -126,7 +100,7 @@ with open((logPrefix), 'w') as log:
         data, addr = serverSocket.recvfrom(1024)
         if 'status OK' in data.decode():
             sout("C" + str(j) + ": " + data.decode())
-            #print (data.decode())
+            # print (data.decode())
             sout('Server adopted connection #' + str(j))
             if (data):
                 thread = Thread(target=threaded_function, args=(j, addr))

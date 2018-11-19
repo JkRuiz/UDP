@@ -1,6 +1,7 @@
 import socket
 import json
 import time
+import select
 
 # Obtiene las propiedades del servidor del archivo configUDP.txt
 
@@ -18,6 +19,9 @@ cliente = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 serverAdr = (properties['serverIp'], int(properties['serverPort']))
 
 fileName = properties['fileName']
+
+buf = properties['chunkSize']
+timeout = 3
 # envia mensaje al servidor
 cliente.sendto('status OK'.encode(), serverAdr)
 
@@ -29,33 +33,13 @@ mensajeTotal = ""
 # Abre el archivo que va a guardar la informacion recibida
 f = open('R_' + fileName, 'wb')
 
-# intensity of protocol messages
-intensity = properties['intensity']
-# num paquetes
-i = 0
-# timer para hacer timeout de la conexion
-timer = time.time()
-timeout = int(properties['timeout'])
-# while para recibir y enviar mensajes
-while hay:
-
-    message, addrSerer = cliente.recvfrom(1024)
-    i = i + 1
-    try:
-        if 'END_OF_FILE' in message.decode():
-            hay = False
-            print('received END_OF_FILE')
-    except:
-        # se incrementa el numero de paquetes recibidos
-        if i % 100 == 0:
-            print("receiving data..")
-        f.write(message)
-
-    print('tiempo actual: ' + str(time.time() - timer))
-    if (time.time() - timer) >= timeout:
-        print('Se cumplio el timeout')
-        hay = False
-
-f.close()
-
-cliente.close()
+data, addr = cliente.recvfrom(buf)
+while True:
+    ready = select.select([cliente], [], [], timeout)
+    if ready[0]:
+        data, addr = cliente.recvfrom(buf)
+        f.write(data)
+    else:
+        print ('Finish!' + fileName)
+        f.close()
+        break
