@@ -61,7 +61,7 @@ def threaded_function(id, addr):
 
         sout("S: Se enviaron: " + str(i) + "paquetes")
 
-        # indica la terminación del while.
+        # indica la terminacion del while.
         hay = False
 
         summary = str(datetime.datetime.now() - start) + "s"
