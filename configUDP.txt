@@ -1,0 +1,12 @@
+{
+	"nClients" : [1],
+	"serverPort" : 18080,
+	"chunkSize" : 1024,
+	"numberClients" : 1,
+	"fileName" : "tigre.jpg",
+	"logPrefix" : "UDP_T",
+	"serverIp" : "157.253.205.122",
+	"timeout" : 60,
+	"intensity" : 500,
+	"clientIPs": ["157.253.205.46"]
+}
