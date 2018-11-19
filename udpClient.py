@@ -50,10 +50,12 @@ while hay:
         if i % 100 == 0:
             print("receiving data..")
         f.write(message)
+
     print('tiempo actual: ' + str(time.time() - timer))
     if (time.time() - timer) >= timeout:
         print('Se cumplio el timeout')
         hay = False
 
 f.close()
+
 cliente.close()
