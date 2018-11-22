@@ -11,7 +11,7 @@ createMetric = "metrics"
 
 def send_metric(fileSize):
     metric = get_metrics()
-    jsonPost = build_json(metric)
+    jsonPost = build_json(metric, fileSize)
     post_metric(jsonPost)
 
 
