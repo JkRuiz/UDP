@@ -3,6 +3,7 @@ import json
 import time
 import select
 import request as rq
+import os
 
 # Obtiene las propiedades del servidor del archivo configUDP.txt
 
@@ -23,6 +24,12 @@ while(True):
         print('waiting for server to send metrics...')
         time.sleep(5)
 
+# Eliminar el archivo si ya existe
+    try:
+        os.remove("R_" + fileName)
+    except:
+        print('The file didnt exist before')
+        pass
 
 properties = getProperties()
 # genera un socket UDP
