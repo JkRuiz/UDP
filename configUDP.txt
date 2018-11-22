@@ -4,7 +4,7 @@
 	"chunkSize" : 1024,
 	"numberClients" : 1,
 	"fileName" : "Gorillaz.mp4",
-	"logPrefix" : "UDP_T",
+	"logPrefix" : "Logs/UDP_T",
 	"serverIp" : "192.168.10.3",
     "indicatorTest" : 1
 }
