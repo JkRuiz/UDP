@@ -14,14 +14,14 @@ def getProperties():
 
 
 # Envia el numero de bytes recibidos antes de recibir el archivo
-    while(True):
-        try:
-            # connect to server
-            rq.send_metric()
-            break
-        except:
-            print('waiting for server to send metrics...')
-            time.sleep(5)
+while(True):
+    try:
+        # connect to server
+        rq.send_metric()
+        break
+    except:
+        print('waiting for server to send metrics...')
+        time.sleep(5)
 
 
 properties = getProperties()

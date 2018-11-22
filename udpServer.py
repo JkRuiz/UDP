@@ -31,7 +31,7 @@ def threaded_function(id, addr):
     data = fileChunks[chunkIndex]
     while (data):
         if(serverSocket.sendto(data, addr)):
-            print "sending ..."
+            print ('sending ...')
             chunkIndex += 1
             if chunkIndex < len(fileChunks):
                 data = fileChunks[chunkIndex]
@@ -58,7 +58,7 @@ port = int(properties['serverPort'])
 chunkSize = int(properties['chunkSize'])
 
 # Genera el log de la transaccion.
-logPrefix = properties['logPrefix'] + str(numeroClientes) + "_" + str(time.time()) + ".log"
+logPrefix = properties['logPrefix'] + str(indicatorTest) + "_Server.log"
 
 
 # genera un socket UDP.
