@@ -38,13 +38,14 @@ def threaded_function(id, addr):
     chunkIndex = 0
     data = fileChunks[chunkIndex]
     while (data):
-        if(serverSocket.sendto(data, addr)):
+        serverSocket.sendto(data, addr)
+        if chunkIndex % 10000 == 0:
             print ('sending ...')
-            chunkIndex += 1
-            if chunkIndex < len(fileChunks):
-                data = fileChunks[chunkIndex]
-            else:
-                data = None
+        chunkIndex += 1
+        if chunkIndex < len(fileChunks):
+            data = fileChunks[chunkIndex]
+        else:
+            data = None
 
     summary = str(datetime.datetime.now() - start) + "s"
     sout("C" + str(id) + ": Transfered in " + summary)
