@@ -19,6 +19,14 @@ def sout(l):
     print(l)
 
 
+def swapProperties():
+    with open('configUDP.txt', 'r') as file:
+        tmp = json.load(file)
+        tmp['indicatorTest'] = tmp['indicatorTest'] + 1
+    with open('configUDP.txt', 'w') as file:
+        file.write(json.dumps(tmp))
+
+
 def threaded_function(id, addr):
 
     start = datetime.datetime.now()
@@ -114,3 +122,4 @@ with open((logPrefix), 'w') as log:
     summary = str(datetime.datetime.now() - tStart) + "s"
     sout("S: Transfered in " + summary)
     serverSocket.close()
+    swapProperties()
