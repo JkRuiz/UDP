@@ -34,9 +34,11 @@ def register():
         ip = str(reqJson['ipClient'])
         receivedBytes = str(reqJson['bytes'])
         time = str(reqJson['time'])
+        fileSize = str(reqJson['fileSize'])
         metrics.write('Cliente - ' + ip + '\n')
         metrics.write('Bytes recibidos - ' + receivedBytes + '\n')
         metrics.write('Fecha - ' + time + '\n')
+        metrics.write('Size of the file received - ' + fileSize + '\n')
         metrics.write('--------------------------------------------------' + '\n')
     return('', 204)
 

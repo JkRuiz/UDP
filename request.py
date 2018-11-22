@@ -9,7 +9,7 @@ url = "http://192.168.10.3:5000/{}"
 createMetric = "metrics"
 
 
-def send_metric():
+def send_metric(fileSize):
     metric = get_metrics()
     jsonPost = build_json(metric)
     post_metric(jsonPost)
@@ -22,11 +22,11 @@ def get_metrics():
     return str(bytesReceived)
 
 
-def build_json(bytesR):
+def build_json(bytesR, fileSize):
     # ip = str(urlopen('http://ip.42.pl/raw').read().decode("utf-8"))
     ip = socket.gethostname()
     time = str(datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
-    data = {"ipClient": ip, "bytes": bytesR, "time": time}
+    data = {"ipClient": ip, "bytes": bytesR, "time": time, "fileSize": fileSize}
     json_data = json.dumps(data)
     return json_data
 

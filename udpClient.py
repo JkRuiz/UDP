@@ -17,8 +17,8 @@ def getProperties():
 # Envia el numero de bytes recibidos antes de recibir el archivo
 while(True):
     try:
-        # connect to server
-        rq.send_metric()
+        # connect to server, send as fileSize zero because theres no file yet
+        rq.send_metric(0)
         break
     except:
         print('waiting for server to send metrics...')
@@ -61,4 +61,5 @@ while True:
         f.close()
         break
 
-rq.send_metric()
+fileSize = os.stat('R_' + fileName).st_size
+rq.send_metric(fileSize)
