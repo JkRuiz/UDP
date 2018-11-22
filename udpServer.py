@@ -57,6 +57,7 @@ port = int(properties['serverPort'])
 # Tamanio de los paquetes que se van a usar.
 chunkSize = int(properties['chunkSize'])
 
+indicatorTest = int(properties['indicatorTest'])
 # Genera el log de la transaccion.
 logPrefix = properties['logPrefix'] + str(indicatorTest) + "_Server.log"
 
@@ -69,10 +70,6 @@ host = socket.gethostname()
 
 # la direccion y el puerto por donde el servidor va a escuchar.
 serverSocket.bind(('', port))
-
-# intensity of protocol messages
-intensity = properties['intensity']
-
 
 # load file to memory
 fileChunks = []
@@ -99,6 +96,8 @@ with open((logPrefix), 'w') as log:
         # recibe los datos del socket y la direccion del cliente.
         data, addr = serverSocket.recvfrom(1024)
         if 'status OK' in data.decode():
+            if j == 1:
+                tStart = datetime.datetime.now()
             sout("C" + str(j) + ": " + data.decode())
             # print (data.decode())
             sout('Server adopted connection #' + str(j))
@@ -112,6 +111,6 @@ with open((logPrefix), 'w') as log:
     for i in range(len(threads)):
         threads[i].join()
 
-    serverSocket.close()
     summary = str(datetime.datetime.now() - tStart) + "s"
     sout("S: Transfered in " + summary)
+    serverSocket.close()

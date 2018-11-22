@@ -19,7 +19,7 @@ def get_indicator():
 
 
 def get_clients():
-    with open('configTCP.json', 'r') as file:
+    with open('configUDP.txt', 'r') as file:
         properties = json.load(file)
         clients = int(properties['numberClients'])
     return clients
