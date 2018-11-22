@@ -20,14 +20,8 @@ def sout(l):
 
 
 def threaded_function(id, addr):
-    timmer = datetime.datetime.now()
-    # print(id)
-    start = datetime.datetime.now()
-    # contador de paquetes
-    i = 0
 
-    # booleano para saber hasta cuando debe seguir activo el while.
-    hay = True
+    start = datetime.datetime.now()
 
     rsp = "Sending " + fileName
 
@@ -36,10 +30,16 @@ def threaded_function(id, addr):
     chunkIndex = 0
     data = fileChunks[chunkIndex]
     while (data):
-        if(s.sendto(data, addr)):
+        if(serverSocket.sendto(data, addr)):
             print "sending ..."
             chunkIndex += 1
-            data = fileChunks[chunkIndex]
+            if chunkIndex < len(fileChunks):
+                data = fileChunks[chunkIndex]
+            else:
+                data = None
+
+    summary = str(datetime.datetime.now() - start) + "s"
+    sout("C" + str(id) + ": Transfered in " + summary)
 
 
 # Obtiene las propiesdades.
@@ -76,7 +76,7 @@ intensity = properties['intensity']
 
 # load file to memory
 fileChunks = []
-with open(fileName, 'r') as f:
+with open(fileName, 'rb') as f:
     l = f.read(chunkSize)
     while (l):
         fileChunks.append(l)
